@@ -26,12 +26,6 @@ public class GuestController {
         return guestResponses;
     }
 
-    //id検索, addressも取得
-//    @GetMapping("/guests/{id}")
-//    public Optional<Guest> findGuestById(@PathVariable("id") int id){
-//        return guestService.findGuestById(id);
-//    }
-
     @GetMapping("/guests/{id}")
     public Optional<GuestResponse> findGuestById (@PathVariable("id") int id){
          return guestService.findGuestById(id);
