@@ -1,5 +1,6 @@
 package com.example.task9.service;
 
+import com.example.task9.controller.form.GuestCreateForm;
 import com.example.task9.exception.ResourceNotFoundException;
 import com.example.task9.entity.Guest;
 import com.example.task9.controller.response.GuestResponse;
@@ -26,5 +27,16 @@ public class GuestServiceImpl implements GuestService {
     public GuestResponse findGuestById(int id) {
         Optional<GuestResponse> guestResponse = guestMapper.findGuestById(id);
         return guestResponse.orElseThrow(() -> new ResourceNotFoundException("resource not found: " + id));
+    }
+
+    @Override
+    public Guest createGuest(GuestCreateForm guestCreateForm) {
+        Guest guest = new Guest(
+                0,
+                guestCreateForm.getName(),
+                guestCreateForm.getAge(),
+                guestCreateForm.getAddress());
+
+        return guest;
     }
 }
