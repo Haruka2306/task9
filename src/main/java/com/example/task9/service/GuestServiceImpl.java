@@ -1,6 +1,5 @@
 package com.example.task9.service;
 
-import com.example.task9.controller.form.GuestCreateForm;
 import com.example.task9.exception.ResourceNotFoundException;
 import com.example.task9.entity.Guest;
 import com.example.task9.controller.response.GuestResponse;
@@ -12,7 +11,7 @@ import java.util.Optional;
 
 @Service
 public class GuestServiceImpl implements GuestService {
-    private GuestMapper guestMapper;
+    private final GuestMapper guestMapper;
 
     public GuestServiceImpl(GuestMapper guestMapper) {
         this.guestMapper = guestMapper;
@@ -30,13 +29,9 @@ public class GuestServiceImpl implements GuestService {
     }
 
     @Override
-    public Guest createGuest(GuestCreateForm guestCreateForm) {
-        Guest guest = new Guest(
-                0,
-                guestCreateForm.getName(),
-                guestCreateForm.getAge(),
-                guestCreateForm.getAddress());
-
+    public Guest createGuest(int id, String name, int age, String address) {
+        Guest guest = new Guest(id, name, age, address);
+        guestMapper.createGuest(guest);
         return guest;
     }
 }

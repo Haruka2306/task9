@@ -49,15 +49,13 @@ public class GuestController {
     }
 
     @PostMapping("/guests")
-    public ResponseEntity<Guest> createGuest(@RequestBody GuestCreateForm guestCreateForm) {
-        Guest guest = guestService.createGuest(guestCreateForm);
-        Guest guestResponse = new Guest(guestCreateForm.getId(), guestCreateForm.getName(), guestCreateForm.getAge(), guestCreateForm.getAddress());
-
-        URI url = UriComponentsBuilder.fromUriString("http://localhost:8080")
-                .path("/guests/" + guestResponse.getId())
+    public ResponseEntity<Map<String, String>> createGuest(@RequestBody GuestCreateForm guestCreateForm, UriComponentsBuilder uriBuilder) {
+        Guest guest = guestService.createGuest(guestCreateForm.getId(), guestCreateForm.getName(), guestCreateForm.getAge(), guestCreateForm.getAddress());
+        URI url = uriBuilder
+                .path("/guests/" + guest.getId())
                 .build()
                 .toUri();
-        return ResponseEntity.created(url).body(guestResponse);
+        return ResponseEntity.created(url).body(Map.of("message", "guest successfully created"));
     }
 }
 
