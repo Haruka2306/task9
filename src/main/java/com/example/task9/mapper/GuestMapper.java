@@ -1,7 +1,6 @@
 package com.example.task9.mapper;
 
 import com.example.task9.entity.Guest;
-import com.example.task9.controller.response.GuestResponse;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -15,5 +14,5 @@ public interface GuestMapper {
 
     //id検索
     @Select("SELECT * FROM guests WHERE id = #{id}")
-    Optional<GuestResponse> findGuestById(int id);
+    Optional<Guest> findGuestById(int id);
 }

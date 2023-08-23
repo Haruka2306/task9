@@ -25,13 +25,14 @@ public class GuestController {
     @GetMapping("/guests")
     public List<GuestResponse> guests() {
         List<Guest> guests = guestService.findAll();
-        List<GuestResponse> guestResponses = guests.stream().map(guest -> new GuestResponse(guest.getId(), guest.getName(), guest.getAge())).toList();
+        List<GuestResponse> guestResponses = guests.stream().map(guest -> new GuestResponse(guest)).toList();
         return guestResponses;
     }
 
     @GetMapping("/guests/{id}")
     public GuestResponse findGuestById (@PathVariable("id") int id){
-        return guestService.findGuestById(id);
+        Guest guest = guestService.findGuestById(id);
+        return new GuestResponse(guest);
     }
     @ExceptionHandler(value = ResourceNotFoundException.class)
     public ResponseEntity<Map<String, String>> handleNoResourceFound(
@@ -45,6 +46,3 @@ public class GuestController {
         return new ResponseEntity(body, HttpStatus.NOT_FOUND);
     }
 }
-
-
-
