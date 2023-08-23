@@ -1,14 +1,16 @@
 package com.example.task9.controller.response;
 
+import com.example.task9.entity.Guest;
+
 public class GuestResponse {
     private int id;
     private String name;
     private int age;
 
-    public GuestResponse(int id, String name, int age) {
-        this.id = id;
-        this.name = name;
-        this.age = age;
+    public GuestResponse(Guest guest) {
+        this.id = guest.getId();
+        this.name = guest.getName();
+        this.age = guest.getAge();
     }
 
     public int getId() {
