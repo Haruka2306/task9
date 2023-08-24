@@ -1,7 +1,6 @@
 package com.example.task9.mapper;
 
 import com.example.task9.entity.Guest;
-import com.example.task9.controller.response.GuestResponse;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
@@ -17,9 +16,9 @@ public interface GuestMapper {
 
     //id検索
     @Select("SELECT * FROM guests WHERE id = #{id}")
-    Optional<GuestResponse> findGuestById(int id);
+    Optional<Guest> findGuestById(int id);
 
     @Insert("INSERT INTO guests(id, name, age, address) VALUES(#{id}, #{name}, #{age}, #{address})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
-    void createGuest(Guest guest);
+    void insertGuest(Guest guest);
 }

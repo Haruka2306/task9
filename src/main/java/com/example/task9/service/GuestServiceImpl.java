@@ -2,7 +2,6 @@ package com.example.task9.service;
 
 import com.example.task9.exception.ResourceNotFoundException;
 import com.example.task9.entity.Guest;
-import com.example.task9.controller.response.GuestResponse;
 import com.example.task9.mapper.GuestMapper;
 import org.springframework.stereotype.Service;
 
@@ -23,15 +22,13 @@ public class GuestServiceImpl implements GuestService {
     }
 
     @Override
-    public GuestResponse findGuestById(int id) {
-        Optional<GuestResponse> guestResponse = guestMapper.findGuestById(id);
-        return guestResponse.orElseThrow(() -> new ResourceNotFoundException("resource not found: " + id));
-    }
+    public Guest findGuestById(int id) {
+        Optional<Guest> guest = guestMapper.findGuestById(id);
+        return guest.orElseThrow(() -> new ResourceNotFoundException("resource not found: " + id));}
 
     @Override
-    public Guest createGuest(int id, String name, int age, String address) {
-        Guest guest = new Guest(id, name, age, address);
-        guestMapper.createGuest(guest);
+    public Guest createGuest(Guest guest) {
+        guestMapper.insertGuest(guest);
         return guest;
     }
 }

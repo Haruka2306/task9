@@ -28,13 +28,14 @@ public class GuestController {
     @GetMapping("/guests")
     public List<GuestResponse> guests() {
         List<Guest> guests = guestService.findAll();
-        List<GuestResponse> guestResponses = guests.stream().map(guest -> new GuestResponse(guest.getId(), guest.getName(), guest.getAge())).toList();
+        List<GuestResponse> guestResponses = guests.stream().map(guest -> new GuestResponse(guest)).toList();
         return guestResponses;
     }
 
     @GetMapping("/guests/{id}")
     public GuestResponse findGuestById (@PathVariable("id") int id){
-        return guestService.findGuestById(id);
+        Guest guest = guestService.findGuestById(id);
+        return new GuestResponse(guest);
     }
     @ExceptionHandler(value = ResourceNotFoundException.class)
     public ResponseEntity<Map<String, String>> handleNoResourceFound(
@@ -50,13 +51,14 @@ public class GuestController {
 
     @PostMapping("/guests")
     public ResponseEntity<Map<String, String>> createGuest(@RequestBody GuestCreateForm guestCreateForm, UriComponentsBuilder uriBuilder) {
-        Guest guest = guestService.createGuest(guestCreateForm.getId(), guestCreateForm.getName(), guestCreateForm.getAge(), guestCreateForm.getAddress());
+        Guest guest = guestService.createGuest(guestCreateForm.convertToGuest());
         URI url = uriBuilder
                 .path("/guests/" + guest.getId())
                 .build()
                 .toUri();
         return ResponseEntity.created(url).body(Map.of("message", "guest successfully created"));
     }
+
 }
 
 
