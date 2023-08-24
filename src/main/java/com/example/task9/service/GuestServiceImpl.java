@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @Service
 public class GuestServiceImpl implements GuestService {
-    private GuestMapper guestMapper;
+    private final GuestMapper guestMapper;
 
     public GuestServiceImpl(GuestMapper guestMapper) {
         this.guestMapper = guestMapper;
@@ -24,6 +24,11 @@ public class GuestServiceImpl implements GuestService {
     @Override
     public Guest findGuestById(int id) {
         Optional<Guest> guest = guestMapper.findGuestById(id);
-        return guest.orElseThrow(() -> new ResourceNotFoundException("resource not found: " + id));
+        return guest.orElseThrow(() -> new ResourceNotFoundException("resource not found: " + id));}
+
+    @Override
+    public Guest createGuest(Guest guest) {
+        guestMapper.insertGuest(guest);
+        return guest;
     }
 }

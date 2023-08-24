@@ -8,4 +8,5 @@ import java.util.List;
 public interface GuestService {
     List<Guest> findAll();
     Guest findGuestById(int id);
+    Guest createGuest(Guest guest);
 }

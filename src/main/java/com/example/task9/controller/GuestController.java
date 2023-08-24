@@ -1,5 +1,6 @@
 package com.example.task9.controller;
 
+import com.example.task9.controller.form.GuestCreateForm;
 import com.example.task9.exception.ResourceNotFoundException;
 import com.example.task9.entity.Guest;
 import com.example.task9.controller.response.GuestResponse;
@@ -8,7 +9,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URI;
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Map;
@@ -45,4 +48,15 @@ public class GuestController {
                 "path", request.getRequestURI());
         return new ResponseEntity(body, HttpStatus.NOT_FOUND);
     }
+
+    @PostMapping("/guests")
+    public ResponseEntity<Map<String, String>> createGuest(@RequestBody GuestCreateForm guestCreateForm, UriComponentsBuilder uriBuilder) {
+        Guest guest = guestService.createGuest(guestCreateForm.convertToGuest());
+        URI url = uriBuilder
+                .path("/guests/" + guest.getId())
+                .build()
+                .toUri();
+        return ResponseEntity.created(url).body(Map.of("message", "guest successfully created"));
+    }
+
 }
