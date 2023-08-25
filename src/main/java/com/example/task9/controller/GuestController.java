@@ -1,6 +1,7 @@
 package com.example.task9.controller;
 
 import com.example.task9.controller.form.GuestCreateForm;
+import com.example.task9.controller.form.GuestUpdateForm;
 import com.example.task9.exception.ResourceNotFoundException;
 import com.example.task9.entity.Guest;
 import com.example.task9.controller.response.GuestResponse;
@@ -57,6 +58,12 @@ public class GuestController {
                 .build()
                 .toUri();
         return ResponseEntity.created(url).body(Map.of("message", "guest successfully created"));
+    }
+
+    @PatchMapping("/guests/{id}")
+    public ResponseEntity<Map<String, String>> updateGuest(@PathVariable("id") int id, @RequestBody GuestUpdateForm guestUpdateForm){
+        guestService.updateGuest(id, guestUpdateForm.getName(), guestUpdateForm.getAge(), guestUpdateForm.getAddress());
+        return ResponseEntity.ok(Map.of("message", "guest successfully updated"));
     }
 
 }
