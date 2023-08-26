@@ -9,6 +9,7 @@ import com.example.task9.service.GuestService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -61,7 +62,7 @@ public class GuestController {
     }
 
     @PatchMapping("/guests/{id}")
-    public ResponseEntity<Map<String, String>> updateGuest(@PathVariable("id") int id, @RequestBody GuestUpdateForm guestUpdateForm){
+    public ResponseEntity<Map<String, String>> updateGuest(@PathVariable("id") int id, @RequestBody @Validated GuestUpdateForm guestUpdateForm){
         guestService.updateGuest(id, guestUpdateForm.getName(), guestUpdateForm.getAge(), guestUpdateForm.getAddress());
         return ResponseEntity.ok(Map.of("message", "guest successfully updated"));
     }
