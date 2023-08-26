@@ -1,11 +1,12 @@
 package com.example.task9.controller.form;
 
 import jakarta.validation.constraints.NotEmpty;
+import org.hibernate.validator.constraints.Range;
 
 public class GuestUpdateForm {
     @NotEmpty(message = "Please provide a name")
     private String name;
-    @NotEmpty(message = "Please provide an age")
+    @Range(min = 20, max = 120, message = "Please age must be between 20 and 120")
     private int age;
     @NotEmpty(message = "Please provide an address")
     private String address;
