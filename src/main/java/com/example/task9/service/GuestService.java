@@ -10,4 +10,5 @@ public interface GuestService {
     Guest findGuestById(int id);
     Guest createGuest(Guest guest);
     void updateGuest(int id, String name, int age, String address);
+    void deleteGuest(int id);
 }

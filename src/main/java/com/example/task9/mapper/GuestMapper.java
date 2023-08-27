@@ -2,6 +2,7 @@ package com.example.task9.mapper;
 
 import com.example.task9.entity.Guest;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
@@ -27,4 +28,7 @@ public interface GuestMapper {
 
     @Update("UPDATE guests SET name = #{name}, age = #{age}, address = #{address} WHERE id = #{id}")
     void updateGuest(Guest guest);
+
+    @Delete("DELETE guests FROM guests WHERE id = #{id}")
+    void deleteGuest(int id);
 }

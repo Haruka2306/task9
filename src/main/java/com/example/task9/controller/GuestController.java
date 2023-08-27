@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -71,5 +72,11 @@ public class GuestController {
     public ResponseEntity<Map<String, String>> updateGuest(@PathVariable("id") int id, @RequestBody @Validated GuestUpdateForm guestUpdateForm){
         guestService.updateGuest(id, guestUpdateForm.getName(), guestUpdateForm.getAge(), guestUpdateForm.getAddress());
         return ResponseEntity.ok(Map.of("message", "guest successfully updated"));
+    }
+
+    @DeleteMapping("/guests/{id}")
+    public ResponseEntity<Map<String, String>> deleteGuest(@PathVariable("id") int id){
+        guestService.deleteGuest(id);
+        return ResponseEntity.ok(Map.of("message", "guest successfully deleted"));
     }
 }
