@@ -31,4 +31,13 @@ public class GuestServiceImpl implements GuestService {
         guestMapper.insertGuest(guest);
         return guest;
     }
+
+    @Override
+    public void updateGuest(int id, String name, int age, String address){
+        Guest guest = guestMapper.findGuestById(id).orElseThrow(() -> new ResourceNotFoundException("resource not found: " + id));
+        guest.setName(name);
+        guest.setAge(age);
+        guest.setAddress(address);
+        guestMapper.updateGuest(guest);
+    }
 }
