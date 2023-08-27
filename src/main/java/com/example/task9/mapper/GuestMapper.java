@@ -29,6 +29,6 @@ public interface GuestMapper {
     @Update("UPDATE guests SET name = #{name}, age = #{age}, address = #{address} WHERE id = #{id}")
     void updateGuest(Guest guest);
 
-    @Delete("DELETE guests FROM guests WHERE id = #{id}")
+    @Delete("DELETE FROM guests WHERE id = #{id}")
     void deleteGuest(int id);
 }
