@@ -40,4 +40,10 @@ public class GuestServiceImpl implements GuestService {
         guest.setAddress(address);
         guestMapper.updateGuest(guest);
     }
+
+    @Override
+    public void deleteGuest(int id){
+        guestMapper.findGuestById(id).orElseThrow(() -> new ResourceNotFoundException("resource not found: " + id));
+        guestMapper.deleteGuest(id);
+    }
 }
