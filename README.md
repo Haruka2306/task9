@@ -1,9 +1,6 @@
 ## MyBatisでReadの実装
 ### 概要
-#### やったこと：4名のid、name(氏名)、age(年齢)、address(住所)の実装
-#### 仕様：id, name, ageのみレスポンスとして返す 
-#### Postman URL：```http://localhost:8080/guests```, ```http://localhost:8080/guests/(id番号)```
-
+お客様のname(氏名)、age(年齢)、address(住所)を登録し、idに紐づいたnameとageを取得する
 ### 動作確認
 * データベース名：guest_db
 * テーブル名：guests
@@ -18,8 +15,10 @@
 
 ![mysql-guest_db](https://github.com/Haruka2306/task9/assets/137120436/c751f9d0-639a-4ecf-b169-26cd0180d8a9)
 
-#### Postman URL：```http://localhost:8080/guests```
+ ####
+     curl --location 'http://localhost:8080/guests'
 ![task9_postman_guests](https://github.com/Haruka2306/task9/assets/137120436/a5b96267-79a4-40a2-8ccc-c857fdc9968d)
 
-#### Postman URL：```http://localhost:8080/guests/1```
+####
+     curl --location 'http://localhost:8080/guests/1'
 ![task9_postman_guests1](https://github.com/Haruka2306/task9/assets/137120436/70f84f53-cab7-47bb-9c38-f0e4988fdfe5)
